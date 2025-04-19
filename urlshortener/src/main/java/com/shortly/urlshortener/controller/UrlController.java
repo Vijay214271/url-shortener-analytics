@@ -17,8 +17,8 @@ import com.shortly.urlshortener.entity.ClickAnalytics;
 import com.shortly.urlshortener.entity.Url;
 import com.shortly.urlshortener.repository.ClickAnalyticsRepository;
 import com.shortly.urlshortener.service.UrlService;
-import com.shortly.urlshortener.util.DeviceDetector;
 import com.shortly.urlshortener.util.GeoLocationUtil;
+import com.shortly.urlshortener.util.UserAgentsUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,10 +28,12 @@ public class UrlController {
 
     private final UrlService urlService;
     private final ClickAnalyticsRepository clickAnalyticsRepository;
+    private final GeoLocationUtil geoLocationUtil;
 
     public UrlController(UrlService urlService, ClickAnalyticsRepository clickAnalyticsRepository) {
         this.urlService = urlService;
         this.clickAnalyticsRepository = clickAnalyticsRepository;
+        this.geoLocationUtil = null;
     }
 
     @PostMapping("/api/shorten")
@@ -49,12 +51,22 @@ public class UrlController {
 
         if (url != null) {
             String ip = request.getRemoteAddr();
-            String userAgent = request.getHeader("User-Agent");
-            String deviceType = DeviceDetector.detectDeviceType(userAgent);
+            String fullUserAgent = request.getHeader("User-Agent");
+            String userAgent = UserAgentsUtil.shortenUserAgent(fullUserAgent);
+            String deviceType = userAgent != null && userAgent.toLowerCase().contains("mobile") ? "mobile" : "Desktop";
+            LocalDateTime time = LocalDateTime.now();
 
-            String[] location = GeoLocationUtil.getLocationFromIP(ip);
+            String[] location = geoLocationUtil.getLocationFromIP(ip);
             String city = location[0];
             String country = location[1]; 
+
+            System.out.println("Analytics Data:");
+            System.out.println("IP: " + ip);
+            System.out.println("User-Agent: " + userAgent);
+            System.out.println("Device: " + deviceType);
+            System.out.println("Country: " + country);
+            System.out.println("City: " + city);
+            System.out.println("Time: " + time);
 
             ClickAnalytics clickAnalytics = ClickAnalytics.builder()
                     .shortCode(shortCode)
@@ -119,4 +131,16 @@ public class UrlController {
 
         return ResponseEntity.ok(dailyStats);
     }
+
+    // Return full list of click analytics for a short code
+    @GetMapping("/api/analytics/{shortCode}")
+    public ResponseEntity<List<ClickAnalytics>> getClickAnalytics(@PathVariable String shortCode) {
+        List<ClickAnalytics> analytics = clickAnalyticsRepository.findAll()
+            .stream()
+            .filter(c -> c.getShortCode().equals(shortCode))
+            .collect(Collectors.toList());
+
+        return ResponseEntity.ok(analytics);
+    }
+
     }

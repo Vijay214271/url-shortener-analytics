@@ -1,4 +1,3 @@
-// src/pages/Analytics.jsx
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from '../api/axios';
@@ -11,8 +10,9 @@ function Analytics() {
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/analytics/daily/${shortCode}`);
+        const res = await axios.get(`http://localhost:8080/api/analytics/${shortCode}`);
         console.log('📊 Analytics API response:', res.data);
+        console.log('📊 clicks data type:', typeof res.data, Array.isArray(res.data));
         setClicks(res.data);
       } catch (err) {
         setError('Failed to fetch analytics');
@@ -27,9 +27,20 @@ function Analytics() {
       <h2>Click Analytics for: <code>{shortCode}</code></h2>
       <Link to="/dashboard" className="btn btn-link mb-3">← Back to Dashboard</Link>
 
+      {/* CSV Export Button */}
+      {clicks.length > 0 && (
+        <a
+          href={`http://localhost:8080/api/analytics/export/${shortCode}`}
+          className="btn btn-success mb-3"
+          download
+        >
+          Export CSV
+        </a>
+      )}
+
       {error && <div className="alert alert-danger">{error}</div>}
 
-      {Object.entries(clicks).length === 0 ? (
+      {clicks.length === 0 ? (
         <div>No clicks yet.</div>
       ) : (
         <table className="table table-bordered">
@@ -43,12 +54,12 @@ function Analytics() {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(clicks).map((click, index) => (
-              <tr key={click.id}>
+            {clicks.map((click, index) => (
+              <tr key={click._id || index}>
                 <td>{index + 1}</td>
                 <td>{click.ipAddress}</td>
                 <td>{click.deviceType}</td>
-                <td>{click.userAgent}...</td>
+                <td title={click.userAgent}>{click.userAgent}</td>
                 <td>{new Date(click.timestamp).toLocaleString()}</td>
               </tr>
             ))}

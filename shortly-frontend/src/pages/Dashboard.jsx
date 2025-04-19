@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function Dashboard() {
   const [urls, setUrls] = useState([]);
+  const BACKEND_BASE_URL=import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchUrls = async () => {
@@ -43,8 +44,8 @@ function Dashboard() {
               <div><strong>Original:</strong> {url.originalUrl}</div>
               <div>
                 <strong>Short:</strong> 
-                <a href={url.shortCode} target="_blank" rel="noreferrer" className="ms-2">
-                  {window.location.origin}/{url.shortCode}
+                <a href={`${BACKEND_BASE_URL}/${url.shortCode}`} target="_blank" rel="noreferrer" className="ms-2">
+                  {BACKEND_BASE_URL}/{url.shortCode}
                 </a>
               </div>
             </div>
