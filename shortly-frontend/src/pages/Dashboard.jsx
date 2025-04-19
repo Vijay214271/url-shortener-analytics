@@ -12,7 +12,7 @@ function Dashboard() {
       console.log("📦 Stored Token:", token);
   
       try {
-        const res = await axios.get('http://localhost:8080/api/urls', {
+        const res = await axios.get('https://url-shortener-analytics.onrender.com/api/urls', {
           headers: {
             Authorization: `Bearer ${token}`
           }

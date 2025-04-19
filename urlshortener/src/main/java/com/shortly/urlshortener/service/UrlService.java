@@ -20,7 +20,7 @@ public class UrlService {
     private final UrlRepository urlRepository;
     private final RedisTemplate<String, String> redisTemplate;
 
-    private final String baseUrl = "http://localhost:8080/";
+    private final String baseUrl = "https://url-shortener-analytics.onrender.com/";
 
     public UrlService(UrlRepository urlRepository, RedisTemplate<String, String> redisTemplate) {
         this.urlRepository = urlRepository;

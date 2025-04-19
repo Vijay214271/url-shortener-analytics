@@ -10,7 +10,7 @@ function Analytics() {
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/analytics/${shortCode}`);
+        const res = await axios.get(`https://url-shortener-analytics.onrender.com/api/analytics/${shortCode}`);
         console.log('📊 Analytics API response:', res.data);
         console.log('📊 clicks data type:', typeof res.data, Array.isArray(res.data));
         setClicks(res.data);
@@ -30,7 +30,7 @@ function Analytics() {
       {/* CSV Export Button */}
       {clicks.length > 0 && (
         <a
-          href={`http://localhost:8080/api/analytics/export/${shortCode}`}
+          href={`https://url-shortener-analytics.onrender.com/api/analytics/export/${shortCode}`}
           className="btn btn-success mb-3"
           download
         >
