@@ -9,7 +9,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.shortly.urlshortener.dto.UrlRequest;
 import com.shortly.urlshortener.dto.UrlResponse;
@@ -102,22 +106,22 @@ public class UrlController {
         response.setContentType("text/csv");
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachmment; filename:\""+shortCode+"-analytics.csv\"");
 
-        PrintWriter writer = response.getWriter();
-        writer.println("IP Address,Device Type,User Agent,City,Country,Timestamp");
-
-        for(ClickAnalytics c: analytics) {
-            writer.printf("%s,%s,%s,%s,%s,%s%n", 
-                c.getIpAddress(),
-                c.getDeviceType(),
-                c.getUserAgent().replace(",", " "),
-                c.getCity(),
-                c.getCountry(),
-                c.getTimestamp()
-            );
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println("IP Address,Device Type,User Agent,City,Country,Timestamp");
+            
+            for(ClickAnalytics c: analytics) {
+                writer.printf("%s,%s,%s,%s,%s,%s%n",
+                        c.getIpAddress(),
+                        c.getDeviceType(),
+                        c.getUserAgent().replace(",", " "),
+                        c.getCity(),
+                        c.getCountry(),
+                        c.getTimestamp()
+                );
+            }
+            
+            writer.flush();
         }
-
-        writer.flush();
-        writer.close();
     }
 
     @GetMapping("/api/analytics/daily/{shortCode}")
