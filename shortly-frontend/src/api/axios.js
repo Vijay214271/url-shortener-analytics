@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://url-shortener-analytics.onrender.com/api',
+    baseURL: 'https://url-shortener-analytics.onrender.com/',
 })
 
 API.interceptors.request.use((req)=>{
