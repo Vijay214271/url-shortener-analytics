@@ -20,7 +20,7 @@ public class UrlService {
     private final UrlRepository urlRepository;
     private final RedisTemplate<String, String> redisTemplate;
 
-    private final String baseUrl = "https://url-shortener-analytics.onrender.com/";
+    private final String baseUrl = "http://localhost:8080/";
 
     public UrlService(UrlRepository urlRepository, RedisTemplate<String, String> redisTemplate) {
         this.urlRepository = urlRepository;
@@ -70,5 +70,15 @@ public class UrlService {
     // 🔎 List all URLs for a user
     public List<Url> getUrlsByUsername(String username) {
         return urlRepository.findByUserId(username);
+    }
+
+    public boolean deleteUrlByShortCode(String shortCode,String username) {
+        return urlRepository.findByShortCode(shortCode)
+            .filter(url->url.getUserId().equals(username))
+            .map(url->{
+                urlRepository.delete(url);
+                return true;
+            })
+            .orElse(false);
     }
 }

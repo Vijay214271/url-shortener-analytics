@@ -12,7 +12,7 @@ function Dashboard() {
       console.log("📦 Stored Token:", token);
   
       try {
-        const res = await axios.get('https://url-shortener-analytics.onrender.com/api/urls', {
+        const res = await axios.get('http://localhost:8080/api/urls', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -25,6 +25,24 @@ function Dashboard() {
     };
     fetchUrls();
   }, []);
+
+  const deleteUrl = async(shortCode) =>{
+    const token = localStorage.getItem("token");
+    if (!window.confirm("Are you sure you want to delete this URL?")) return;
+
+    try {
+      await axios.delete(`http://localhost:8080/api/urls/${shortCode}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("URL deleted successfully!");
+      setUrls(prev => prev.filter(url => url.shortCode !== shortCode));
+    } catch (err) {
+      console.error("❌ Delete error:", err);
+      alert("Failed to delete URL.");
+    }
+  }
   
 
 
@@ -56,6 +74,9 @@ function Dashboard() {
               <Link to={`/analytics/${url.shortCode}`} className="btn btn-sm btn-outline-secondary">
                 📈 View Analytics
               </Link>
+              <button className="btn btn-sm btn-outline-danger" onClick={() => deleteUrl(url.shortCode)}>
+              🗑️ Delete
+            </button>
             </div>
           </div>
         ))}

@@ -35,14 +35,18 @@ public class AuthService {
     }
 
     public String login(AuthRequest request) {
+        System.out.println("🔐 Login called with: " + request.getUsername());
+    
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
+            .orElseThrow(() -> new RuntimeException("User not found"));
+    
         if (!encoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
-
-        return jwtUtil.generateToken(user.getUsername());
+    
+        String token = jwtUtil.generateToken(user.getUsername());
+        System.out.println("✅ Token generated: " + token);
+        return token;
     }
     
 }

@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,11 +31,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class UrlController {
 
     private final UrlService urlService;
     private final ClickAnalyticsRepository clickAnalyticsRepository;
+    @Autowired
     private final GeoLocationUtil geoLocationUtil;
 
     public UrlController(UrlService urlService, ClickAnalyticsRepository clickAnalyticsRepository) {
@@ -147,6 +150,19 @@ public class UrlController {
             .collect(Collectors.toList());
 
         return ResponseEntity.ok(analytics);
+    }
+
+    @DeleteMapping("/api/urls/{shortCode}")
+    public ResponseEntity<String> deleteUrl(@PathVariable String shortCode,HttpServletRequest request){
+        String username = (String) request.getAttribute("username");
+        System.out.println("🔒 Authenticated user trying to delete: " + username); 
+        boolean deleted = urlService.deleteUrlByShortCode(shortCode, username);
+        if(deleted) {
+            return ResponseEntity.ok("✅ URL deleted successfully.");
+        }
+        else {
+            return ResponseEntity.status(403).body("❌ Unauthorized or URL not found.");
+        }
     }
 
     }

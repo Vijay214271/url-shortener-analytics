@@ -12,7 +12,7 @@ import com.shortly.urlshortener.dto.AuthResponse;
 import com.shortly.urlshortener.service.AuthService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/api/auth")
 public class AuthController {
     

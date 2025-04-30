@@ -15,7 +15,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtUtil {
     private final String secretKey = Base64.getEncoder().encodeToString("VIJAYAKUMARPATNALA1234567890abc7899".getBytes());
-    private int jwtExpirationInMs = 604800000;
+    private final int jwtExpirationInMs = 604800000;
     // public JwtUtil() throws NoSuchAlgorithmException {
     //     KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
     //     SecretKey sk = keyGen.generateKey();

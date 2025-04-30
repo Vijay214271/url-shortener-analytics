@@ -16,7 +16,7 @@ function Shorten() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/shorten', form,{
+      const res = await axios.post('/api/shorten', form,{
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

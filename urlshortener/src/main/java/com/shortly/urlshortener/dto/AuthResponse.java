@@ -1,14 +1,19 @@
 package com.shortly.urlshortener.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-// DTO for response
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class AuthResponse {
     private String token;
-}
 
+    public AuthResponse() {} // REQUIRED
+
+    public AuthResponse(String token) {
+        this.token = token;
+    }
+
+    public String getToken() { // REQUIRED
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+}
