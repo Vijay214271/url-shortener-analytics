@@ -12,7 +12,7 @@ import com.shortly.urlshortener.dto.AuthResponse;
 import com.shortly.urlshortener.service.AuthService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = "https://url-shortener-analytics.vercel.app/")
 @RequestMapping("/api/auth")
 public class AuthController {
     
