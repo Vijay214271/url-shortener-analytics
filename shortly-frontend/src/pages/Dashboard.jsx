@@ -12,7 +12,7 @@ function Dashboard() {
       console.log("📦 Stored Token:", token);
   
       try {
-        const res = await axios.get('http://localhost:8080/api/urls', {
+        const res = await axios.get('https://url-shortener-analytics.onrender.com/api/urls', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -31,7 +31,7 @@ function Dashboard() {
     if (!window.confirm("Are you sure you want to delete this URL?")) return;
 
     try {
-      await axios.delete(`http://localhost:8080/api/urls/${shortCode}`, {
+      await axios.delete(`https://url-shortener-analytics.onrender.com/api/urls/${shortCode}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
