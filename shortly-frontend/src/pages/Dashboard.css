@@ -1,6 +1,5 @@
 .dashboard-container {
-    background: url('/') center center / cover no-repeat;
-    background-color: #5a6268;
+    background: url('/background.jpg') center center / cover no-repeat;
     min-height: 100vh;
     padding: 60px 20px;
     display: flex;
