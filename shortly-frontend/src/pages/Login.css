@@ -1,0 +1,43 @@
+.login-page {
+    background: url('/background.jpg') no-repeat center center/cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    color: #fff;
+    animation: fadeIn 0.7s ease-in-out;
+  }
+  
+  .login-card input {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+  }
+  
+  .login-card input::placeholder {
+    color: #ddd;
+  }
+  
+  .login-card input:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  

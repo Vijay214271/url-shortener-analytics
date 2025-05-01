@@ -1,8 +1,7 @@
-// src/pages/Register.jsx
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from '../api/axios';
-import { Link } from 'react-router-dom';
+import './Register.css'; // 👈 New styles
 
 function Register() {
   const navigate = useNavigate();
@@ -25,21 +24,25 @@ function Register() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Register</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label>Username</label>
-          <input className="form-control" name="username" value={form.username} onChange={handleChange} required />
-        </div>
-        <div className="mb-3">
-          <label>Password</label>
-          <input className="form-control" name="password" type="password" value={form.password} onChange={handleChange} required />
-        </div>
-        <button className="btn btn-primary">Register</button>
-      </form>
-      <p>Already have an account? <Link to="/login">Login</Link></p>
+    <div className="register-page">
+      <div className="register-card">
+        <h2 className="mb-4">Create an Account</h2>
+        {error && <div className="alert alert-danger w-100 text-center">{error}</div>}
+        <form onSubmit={handleSubmit} className="w-100">
+          <div className="mb-3">
+            <label className="form-label">Username</label>
+            <input className="form-control" name="username" value={form.username} onChange={handleChange} required />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input className="form-control" type="password" name="password" value={form.password} onChange={handleChange} required />
+          </div>
+          <button className="btn btn-primary w-100">Register</button>
+        </form>
+        <p className="mt-3">
+          Already have an account? <Link to="/login" className="text-primary">Login</Link>
+        </p>
+      </div>
     </div>
   );
 }

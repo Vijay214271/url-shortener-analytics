@@ -1,0 +1,85 @@
+/* src/pages/Shorten.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url('/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    overflow: auto;
+  }
+  
+  /* Overlay to darken the background */
+  .page-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+  }
+  
+  /* Main card with glassmorphism */
+  .card-glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px;
+    color: #fff;
+  }
+  
+  .card-glass h2 {
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #f1f1f1;
+  }
+  
+  /* Input styles */
+  .card-glass .form-control {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    border-radius: 8px;
+  }
+  
+  .card-glass .form-control::placeholder {
+    color: #ddd;
+  }
+  
+  .card-glass .form-control:focus {
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    box-shadow: none;
+  }
+  
+  /* Button styles */
+  .card-glass .btn-primary {
+    background-color: #1abc9c;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+  }
+  
+  .card-glass .btn-primary:hover {
+    background-color: #16a085;
+  }
+  
+  .card-glass .btn-link {
+    color: #f1f1f1;
+    margin-left: 10px;
+  }
+  
+  /* Alerts */
+  .alert {
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  

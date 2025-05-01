@@ -1,22 +1,30 @@
 // src/pages/Landing.jsx
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import './Landing.css';
 
 function Landing() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-      const token = localStorage.getItem('token');
-      if (token) navigate('/dashboard');
-    }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) navigate('/dashboard');
+  }, []);
+
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center vh-100 text-center bg-light">
-      <h1 className="display-4 mb-3">Welcome to <span className="text-primary">Shortly</span> 🚀</h1>
-      <p className="lead mb-4">Shorten your links. Track every click. Get real-time analytics.</p>
-      <div>
-        <Link to="/login" className="btn btn-primary me-2">Login</Link>
-        <Link to="/register" className="btn btn-outline-primary">Register</Link>
+    <div className="landing-container">
+      <div className="landing-overlay" />
+      <div className="landing-content fade-in">
+        <h1 className="landing-title">
+          Welcome to <span className="brand-name">Shortly</span> 🚀
+        </h1>
+        <p className="landing-subtitle">
+          Transform long links into smart, trackable URLs in seconds.
+        </p>
+        <div className="landing-buttons">
+          <Link to="/login" className="btn btn-primary">Login</Link>
+          <Link to="/register" className="btn btn-outline-light ms-2">Register</Link>
+        </div>
       </div>
     </div>
   );

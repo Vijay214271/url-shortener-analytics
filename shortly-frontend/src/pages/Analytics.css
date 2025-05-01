@@ -1,0 +1,91 @@
+/* src/pages/Analytics.css */
+
+/* Container styles */
+.container {
+    max-width: 900px;
+    margin-top: 50px;
+  }
+  
+  /* Heading */
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Back Button and Export Button styles */
+  .d-flex {
+    margin-bottom: 20px;
+  }
+  
+  .d-flex .btn {
+    font-size: 14px;
+  }
+  
+  .btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
+  /* Table styles */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  .table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6;
+  }
+  
+  /* Alert styles */
+  .alert {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #bee5eb;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+  }
+  

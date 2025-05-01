@@ -1,0 +1,82 @@
+.dashboard-container {
+    background: url('/background.jpg') center center / cover no-repeat;
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
+  
+  .dashboard-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    color: white;
+  }
+  
+  .url-item {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .url-text a {
+    color: #00bfff;
+    text-decoration: none;
+  }
+  
+  .url-text a:hover {
+    text-decoration: underline;
+  }
+  
+  .url-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .url-actions button,
+  .url-actions .btn-secondary {
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+  }
+  
+  .url-actions button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .url-actions button:hover {
+    background-color: #0056b3;
+  }
+  
+  .url-actions .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .url-actions .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .url-actions .btn-danger {
+    background-color: #dc3545;
+  }
+  
+  .url-actions .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
